@@ -1,9 +1,9 @@
 ﻿using System;
 
 namespace SysBodega {
-    class Program {
+    class Main {
         static void Main(string[] args) {
-            Console.WriteLine("Hello World!");
+           
         }
     }
 }
