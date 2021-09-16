@@ -16,7 +16,7 @@ class Bebida{
 		precoVenda = preco;
 	}
 
-	void vender(int quantidade) {
+	/*void vender(int quantidade) {
 		if(quantidade < qtdEstoque) {
 			qtdEstoque -= quantidade;
 			Console.WriteLine("A quantidade em estoque foi alterada com sucesso!");
@@ -28,6 +28,6 @@ class Bebida{
 	void comprar(int quatidade) {
 		qtdEstoque += quantidade;
 		Console.WriteLine("A quantidade foi alterada com sucesso!");
-    }
+    }*/
 	
 }
