@@ -3,3 +3,14 @@ C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.
 C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.AssemblyInfoInputs.cache
 C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.AssemblyInfo.cs
 C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.csproj.CoreCompileInputs.cache
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\bin\Debug\net5.0\SysBodega.exe
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\bin\Debug\net5.0\SysBodega.deps.json
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\bin\Debug\net5.0\SysBodega.runtimeconfig.json
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\bin\Debug\net5.0\SysBodega.runtimeconfig.dev.json
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\bin\Debug\net5.0\SysBodega.dll
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\bin\Debug\net5.0\ref\SysBodega.dll
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\bin\Debug\net5.0\SysBodega.pdb
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.dll
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\ref\SysBodega.dll
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.pdb
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.genruntimeconfig.cache
