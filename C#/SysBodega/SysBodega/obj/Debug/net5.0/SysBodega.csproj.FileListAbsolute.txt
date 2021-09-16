@@ -1,0 +1,5 @@
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.csproj.AssemblyReference.cache
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.AssemblyInfoInputs.cache
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.AssemblyInfo.cs
+C:\Users\Eletro\Documents\GitHub\projetos\C#\SysBodega\SysBodega\obj\Debug\net5.0\SysBodega.csproj.CoreCompileInputs.cache
