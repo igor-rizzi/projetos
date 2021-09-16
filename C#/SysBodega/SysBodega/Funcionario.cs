@@ -1,10 +1,10 @@
 ﻿using System;
 
 public class Funcionario{
-	private String nomeFun;
-	private int codigoFun;
-	private int idade;
-	private Double salario;
+	public String nomeFun;
+	public int codigoFun;
+	public int idade;
+	public Double salario;
 
 	public Funcionario(String nome, int numero, int idadeFun, Double salarioFun) {
 		nomeFun = nome;
