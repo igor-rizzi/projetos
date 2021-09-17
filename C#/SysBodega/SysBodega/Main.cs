@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace SysBodega {
     class Mae {
@@ -17,7 +20,9 @@ namespace SysBodega {
             List<Bebida> bebidas = new List<Bebida>();
             List<Cliente> clientes = new List<Cliente>();
 
-            Console.WriteLine("Seja muito bem-vindo ao sistema da Bodega do Juaum!");
+
+
+                Console.WriteLine("Seja muito bem-vindo ao sistema da Bodega do Juaum!");
             do {
                 Console.WriteLine("Informe o que você quer fazer: \n1 - Criar funcionário \n2 - Listar Funcionários \n3 - Adicionar bebida \n4 - Listar bebidas \n5 - Comprar bebida \n6 - Vender bebida \n7 - Adicionar cliente \n8 - Listar clientes \n9 - Sair");
                 opt = Console.ReadLine();
@@ -33,13 +38,20 @@ namespace SysBodega {
                     String salario = Console.ReadLine();
                     salarioFun = double.Parse(salario);
 
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin; pwd=admin123@;");
+                    conectar.Open();
+
+                    MySqlCommand Criar = new MySqlCommand();
+                    Criar.Connection = conectar;  
+
                     Funcionario fun = new Funcionario(nome, numero, idadeFun, salarioFun);
                     bodegueiros.Add(fun);
                     numero++;
                 }
                 else if (opcao == 2) {
                     foreach (Funcionario bb in bodegueiros) {
-                        Console.WriteLine("O nome do funcionario é:", bb.nomeFun);
+                        Console.WriteLine("O nome do funcionario é:" + bb.nomeFun);
+                       
                     }
 
 
