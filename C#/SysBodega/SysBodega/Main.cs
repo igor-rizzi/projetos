@@ -85,6 +85,35 @@ namespace SysBodega {
 
                     Console.WriteLine("\n");
 
+                } else if(opcao == 3) {
+                    Console.WriteLine("Informe o nome da bebida:");
+                    String nomeDrink = Console.ReadLine();
+                    Console.WriteLine("Informe o teor alcóolico da bebida:");
+                    String teor = Console.ReadLine();
+                    Double teorAlcool = double.Parse(teor);
+                    Console.WriteLine("Informe quantos Mls tem a bebida:");
+                    String miliLitro = Console.ReadLine();
+                    Double ml = double.Parse(miliLitro);
+                    Console.WriteLine("Informe o preço da bebida:");
+                    String price = Console.ReadLine();
+                    double preco = double.Parse(price);
+
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                    conectar.Open();
+
+                    MySqlCommand Criar = new MySqlCommand();
+                    Criar.Connection = conectar;
+                    Criar.CommandText = "CREATE TABLE IF NOT EXISTS bebida(cod_drink integer not null primary key auto_increment, nome_bebida varchar(30), teor_alcoolico float, preco_bebida float, ml_bebida float, quatidade_bebida integer)";
+                    Criar.ExecuteNonQuery();
+                    Criar.CommandText = "INSERT INTO bebida(nome_bebida, teor_alcoolico, preco_bebida, ml_bebida) VALUES ('"
+                        + nomeDrink + "','" + teorAlcool + "' , '" + preco + "' , '" + ml + "')";
+                    Criar.ExecuteNonQuery();
+                    conectar.Close();
+                    Console.WriteLine("\n A bebida foi inserido com sucesso!\n");
+
+                    Bebida drink = new Bebida(nomeDrink, codigoDrink, teorAlcool, ml, preco);
+                    bebidas.Add(drink);
+                    numero++;
                 }
             } while (opcao != 9);
 
