@@ -109,11 +109,46 @@ namespace SysBodega {
                         + nomeDrink + "','" + teorAlcool + "' , '" + preco + "' , '" + ml + "')";
                     Criar.ExecuteNonQuery();
                     conectar.Close();
-                    Console.WriteLine("\n A bebida foi inserido com sucesso!\n");
+                    Console.WriteLine("\nA bebida foi inserida com sucesso!\n");
 
                     Bebida drink = new Bebida(nomeDrink, codigoDrink, teorAlcool, ml, preco);
                     bebidas.Add(drink);
                     numero++;
+
+                    Console.WriteLine("\n");
+
+                } else if(opcao == 4) {
+                    int id_fun;
+                    int numBeb;
+
+
+                    Console.WriteLine("Informe o código da bebida desejada:");
+                    String num = Console.ReadLine();
+                    numBeb = int.Parse(num);
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                    conectar.Open();
+
+                    MySqlCommand select = new MySqlCommand();
+                    select.Connection = conectar;
+                    select.CommandText = "SELECT * FROM bebida ORDER BY cod_drink";
+                    select.Parameters.Clear();
+                    select.Parameters.Add("@cod_drink", MySqlDbType.Int32).Value = numBeb;
+
+                    select.CommandType = System.Data.CommandType.Text;
+
+                    MySqlDataReader dr;
+                    dr = select.ExecuteReader();
+                    dr.Read();
+
+                    Console.WriteLine("O código da bebida é: " + dr.GetString(0));
+                    Console.WriteLine("O nome da bebida é: " + dr.GetString(1));
+                    Console.WriteLine("O teor alcoolico da bebida é: " + dr.GetString(2));
+                    Console.WriteLine("A quantidade em MLs é: " + dr.GetString(3));
+                    Console.WriteLine("O preço da bebida é: " + dr.GetString(4));
+
+                    conectar.Close();
+
+                    Console.WriteLine("\n");
                 }
             } while (opcao != 9);
 
