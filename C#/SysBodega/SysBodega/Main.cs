@@ -245,6 +245,8 @@ namespace SysBodega {
                     conectar.Close();
 
                     Console.WriteLine("\n");
+                }else if(opcao == 7) {
+
                 }
             } while (opcao != 9);
 
