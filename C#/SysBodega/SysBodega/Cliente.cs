@@ -12,11 +12,11 @@ public class Cliente{
 		codigoCliente = codCliente;
     }
 
-	void vendeFiado(int venderFiado) {
-		if(venderFiado == 1) {
+	void vendeFiado(String venderFiado) {
+		if(venderFiado == "Sim") {
 			Console.WriteLine("Este cliente pode comprar fiado!");
 			vendaFiado = true;
-        }else if (venderFiado == 2){
+        }else if (venderFiado == "Nao"){
 			Console.WriteLine("Este cliente não pode comprar fiado!");
 			vendaFiado = false;
         }else {
