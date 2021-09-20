@@ -122,7 +122,7 @@ namespace SysBodega {
                     int numBeb;
 
 
-                    Console.WriteLine("Informe o código da bebida desejada:");
+                    Console.WriteLine("\nInforme o código da bebida desejada:");
                     String num = Console.ReadLine();
                     numBeb = int.Parse(num);
                     MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
@@ -145,6 +145,31 @@ namespace SysBodega {
                     Console.WriteLine("O teor alcoolico da bebida é: " + dr.GetString(2));
                     Console.WriteLine("A quantidade em MLs é: " + dr.GetString(3));
                     Console.WriteLine("O preço da bebida é: " + dr.GetString(4));
+
+                    conectar.Close();
+
+                    Console.WriteLine("\n");
+                } else if(opcao == 5) {
+                    Console.WriteLine("Informe qual a bebida para ser comprada:");
+                    String indice = Console.ReadLine();
+                    int numBebida = int.Parse(indice);
+
+                    Console.WriteLine("\nInforme a quantidade de compra:");
+                    String qtd = Console.ReadLine();
+                    int quantidade = int.Parse(qtd);
+
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                    conectar.Open();
+
+
+
+                    MySqlCommand select = new MySqlCommand();
+                    select.Connection = conectar;
+                    select.CommandText = "UPDATE Bebida SET quantidade=@drink.qtdEstoque WHERE cod_drink=@numBebida";
+
+
+                    select.CommandType = System.Data.CommandType.Text;
+
 
                     conectar.Close();
 
