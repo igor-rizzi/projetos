@@ -1,8 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace SysBodega {
     class Mae {
@@ -38,22 +36,54 @@ namespace SysBodega {
                     String salario = Console.ReadLine();
                     salarioFun = double.Parse(salario);
 
-                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin; pwd=admin123@;");
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
                     conectar.Open();
 
                     MySqlCommand Criar = new MySqlCommand();
-                    Criar.Connection = conectar;  
+                    Criar.Connection = conectar;
+                    Criar.CommandText = "CREATE TABLE IF NOT EXISTS funcionario(id_fun integer not null primary key auto_increment, nome_fun varchar(30), idade_fun integer, salario_fun float)";
+                    Criar.ExecuteNonQuery();
+                    Criar.CommandText = "INSERT INTO funcionario (nome_fun, idade_fun, salario_fun) VALUES ('"
+                        + nome + "','" + idadeFun + "' , '" + salarioFun + "')";
+                    Criar.ExecuteNonQuery();
+                    conectar.Close();
+                    Console.WriteLine("\nO funcionário foi inserido com sucesso!\n");
 
                     Funcionario fun = new Funcionario(nome, numero, idadeFun, salarioFun);
                     bodegueiros.Add(fun);
                     numero++;
                 }
                 else if (opcao == 2) {
-                    foreach (Funcionario bb in bodegueiros) {
-                        Console.WriteLine("O nome do funcionario é:" + bb.nomeFun);
-                       
-                    }
+                    int id_fun;
+                    int numFun;
+                    
 
+                    Console.WriteLine("Informe o código do funcionário desejado:");
+                    String num = Console.ReadLine();
+                    numFun = int.Parse(num);
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                    conectar.Open();
+
+                    MySqlCommand select = new MySqlCommand();
+                    select.Connection = conectar;
+                    select.CommandText = "SELECT * FROM funcionario ORDER BY id_fun";
+                    select.Parameters.Clear();
+                    select.Parameters.Add("@id_fun", MySqlDbType.Int32).Value = numFun;
+
+                    select.CommandType = System.Data.CommandType.Text;
+
+                    MySqlDataReader dr;
+                    dr = select.ExecuteReader();
+                    dr.Read();
+
+                    Console.WriteLine("O id do funcionário é: " + dr.GetString(0));
+                    Console.WriteLine("O nome do funcionário é: " + dr.GetString(1));
+                    Console.WriteLine("A idade do funcionário é: " + dr.GetString(2));
+                    Console.WriteLine("O salário do funcionário é: " + dr.GetString(3));
+
+                    conectar.Close();
+
+                    Console.WriteLine("\n");
 
                 }
             } while (opcao != 9);
