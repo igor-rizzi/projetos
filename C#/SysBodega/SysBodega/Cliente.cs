@@ -6,13 +6,13 @@ public class Cliente{
 	private String cpf;
 	private Boolean vendaFiado;
 
-	public Cliente(String nomeCli, String cpfCliente, int codCliente, int venderFiado) {
+	public Cliente(String nomeCli, String cpfCliente, int codCliente, String venderFiado) {
 		nomeCliente = nomeCli;
 		cpf = cpfCliente;
 		codigoCliente = codCliente;
     }
 
-	void vendeFiado(String venderFiado) {
+	public void vendeFiado(String venderFiado) {
 		if(venderFiado == "Sim") {
 			Console.WriteLine("Este cliente pode comprar fiado!");
 			vendaFiado = true;
