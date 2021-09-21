@@ -20,67 +20,75 @@ namespace SysBodega {
 
                 Console.WriteLine("Seja muito bem-vindo ao sistema da Bodega do Juaum!");
             do {
-                Console.WriteLine("Informe o que você quer fazer: \n1 - Criar funcionário \n2 - Listar Funcionários \n3 - Adicionar bebida \n4 - Listar bebidas \n5 - Comprar bebida \n6 - Vender bebida \n7 - Adicionar cliente \n8 - Listar clientes \n9 - Sair");
+                Console.WriteLine("\nInforme o que você quer fazer: \n1 - Criar funcionário \n2 - Listar Funcionários \n3 - Adicionar bebida \n4 - Listar bebidas \n5 - Comprar bebida \n6 - Vender bebida \n7 - Adicionar cliente \n8 - Listar clientes \n9 - Sair");
                 opt = Console.ReadLine();
                 opcao = int.Parse(opt);
 
                 if (opcao == 1) {
-                    Console.WriteLine("Informe o nome do funcionário:");
-                    nome = Console.ReadLine();
-                    Console.WriteLine("Informe a idade do funcionário:");
-                    String idade = Console.ReadLine();
-                    idadeFun = int.Parse(idade);
-                    Console.WriteLine("Informe o salário do funcionário:");
-                    String salario = Console.ReadLine();
-                    salarioFun = double.Parse(salario);
+                    try {
+                        Console.WriteLine("Informe o nome do funcionário:");
+                        nome = Console.ReadLine();
+                        Console.WriteLine("Informe a idade do funcionário:");
+                        String idade = Console.ReadLine();
+                        idadeFun = int.Parse(idade);
+                        Console.WriteLine("Informe o salário do funcionário:");
+                        String salario = Console.ReadLine();
+                        salarioFun = double.Parse(salario);
 
-                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
-                    conectar.Open();
+                        MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                        conectar.Open();
 
-                    MySqlCommand Criar = new MySqlCommand();
-                    Criar.Connection = conectar;
-                    Criar.CommandText = "CREATE TABLE IF NOT EXISTS funcionario(id_fun integer not null primary key auto_increment, nome_fun varchar(30), idade_fun integer, salario_fun float)";
-                    Criar.ExecuteNonQuery();
-                    Criar.CommandText = "INSERT INTO funcionario (nome_fun, idade_fun, salario_fun) VALUES ('"
-                        + nome + "','" + idadeFun + "' , '" + salarioFun + "')";
-                    Criar.ExecuteNonQuery();
-                    conectar.Close();
-                    Console.WriteLine("\nO funcionário foi inserido com sucesso!\n");
+                        MySqlCommand Criar = new MySqlCommand();
+                        Criar.Connection = conectar;
+                        Criar.CommandText = "CREATE TABLE IF NOT EXISTS funcionario(id_fun integer not null primary key auto_increment, nome_fun varchar(30), idade_fun integer, salario_fun float)";
+                        Criar.ExecuteNonQuery();
+                        Criar.CommandText = "INSERT INTO funcionario (nome_fun, idade_fun, salario_fun) VALUES ('"
+                            + nome + "','" + idadeFun + "' , '" + salarioFun + "')";
+                        Criar.ExecuteNonQuery();
+                        conectar.Close();
+                        Console.WriteLine("\nO funcionário foi inserido com sucesso!\n");
 
-                    Funcionario fun = new Funcionario(nome, numero, idadeFun, salarioFun);
-                    bodegueiros.Add(fun);
-                    numero++;
-                }
-                else if (opcao == 2) {
-                    int id_fun;
-                    int numFun;
+                        Funcionario fun = new Funcionario(nome, numero, idadeFun, salarioFun);
+                        bodegueiros.Add(fun);
+                        numero++;
+                    }
+                    catch {
+                        Console.WriteLine("Erro! Por favor preste atenção aos tipos de dados inseridos!");
+                     }    
+                }else if (opcao == 2) {
+                    try {
+
+                        int numFun;
+
+                        Console.WriteLine("Informe o código do funcionário desejado:");
+                        String num = Console.ReadLine();
+                        numFun = int.Parse(num);
+                        MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                        conectar.Open();
+
+                        MySqlCommand select = new MySqlCommand();
+                        select.Connection = conectar;
+                        select.CommandText = "SELECT * FROM funcionario WHERE id_fun = @idFun ORDER BY id_fun";
+                        select.Parameters.Clear();
+                        select.Parameters.Add("@idFun", MySqlDbType.Int32).Value = numFun;
+
+                        select.CommandType = System.Data.CommandType.Text;
+
+                        MySqlDataReader dr;
+                        dr = select.ExecuteReader();
+                        dr.Read();
                     
-                    Console.WriteLine("Informe o código do funcionário desejado:");
-                    String num = Console.ReadLine();
-                    numFun = int.Parse(num);
-                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
-                    conectar.Open();
+                        Console.WriteLine("O id do funcionário é: " + dr.GetString(0));
+                        Console.WriteLine("O nome do funcionário é: " + dr.GetString(1));
+                        Console.WriteLine("A idade do funcionário é: " + dr.GetString(2));
+                        Console.WriteLine("O salário do funcionário é: " + dr.GetString(3));
 
-                    MySqlCommand select = new MySqlCommand();
-                    select.Connection = conectar;
-                    select.CommandText = "SELECT * FROM funcionario WHERE id_fun = @idFun ORDER BY id_fun";
-                    select.Parameters.Clear();
-                    select.Parameters.Add("@idFun", MySqlDbType.Int32).Value = numFun;
+                        conectar.Close();
 
-                    select.CommandType = System.Data.CommandType.Text;
-
-                    MySqlDataReader dr;
-                    dr = select.ExecuteReader();
-                    dr.Read();
-
-                    Console.WriteLine("O id do funcionário é: " + dr.GetString(0));
-                    Console.WriteLine("O nome do funcionário é: " + dr.GetString(1));
-                    Console.WriteLine("A idade do funcionário é: " + dr.GetString(2));
-                    Console.WriteLine("O salário do funcionário é: " + dr.GetString(3));
-
-                    conectar.Close();
-
-                    Console.WriteLine("\n");
+                        Console.WriteLine("\n");
+                    }
+                    catch { Console.WriteLine("Pode ser que o código informado não exista no banco de dados!"); }
+                    
 
                 } else if(opcao == 3) {
                     Console.WriteLine("Informe o nome da bebida:");
@@ -115,7 +123,6 @@ namespace SysBodega {
                     Console.WriteLine("\n");
 
                 } else if(opcao == 4) {
-                    int id_fun;
                     int numBeb;
 
                     Console.WriteLine("\nInforme o código da bebida desejada:");
@@ -273,7 +280,6 @@ namespace SysBodega {
                     codCliente++;
 
                 }else if(opcao == 8) {
-                    int id_cli;
                     int numCli;
 
                     Console.WriteLine("Informe o código do cliente desejado:");
