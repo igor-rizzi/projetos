@@ -63,9 +63,9 @@ namespace SysBodega {
 
                     MySqlCommand select = new MySqlCommand();
                     select.Connection = conectar;
-                    select.CommandText = "SELECT * FROM funcionario ORDER BY id_fun";
+                    select.CommandText = "SELECT * FROM funcionario WHERE id_fun = @idFun ORDER BY id_fun";
                     select.Parameters.Clear();
-                    select.Parameters.Add("@id_fun", MySqlDbType.Int32).Value = numFun;
+                    select.Parameters.Add("@idFun", MySqlDbType.Int32).Value = numFun;
 
                     select.CommandType = System.Data.CommandType.Text;
 
@@ -126,9 +126,9 @@ namespace SysBodega {
 
                     MySqlCommand select = new MySqlCommand();
                     select.Connection = conectar;
-                    select.CommandText = "SELECT * FROM bebida ORDER BY cod_drink";
+                    select.CommandText = "SELECT * FROM bebida WHERE cod_drink = @codDrink ORDER BY cod_drink";
                     select.Parameters.Clear();
-                    select.Parameters.Add("@cod_drink", MySqlDbType.Int32).Value = numBeb;
+                    select.Parameters.Add("@codDrink", MySqlDbType.Int32).Value = numBeb;
 
                     select.CommandType = System.Data.CommandType.Text;
 
@@ -159,9 +159,9 @@ namespace SysBodega {
 
                     MySqlCommand select = new MySqlCommand();
                     select.Connection = conect;
-                    select.CommandText = "SELECT * FROM bebida ORDER BY cod_drink";
+                    select.CommandText = "SELECT * FROM bebida WHERE cod_drink = @codDrink ORDER BY cod_drink";
                     select.Parameters.Clear();
-                    select.Parameters.Add("@cod_drink", MySqlDbType.Int32).Value = numBeb;
+                    select.Parameters.Add("@codDrink", MySqlDbType.Int32).Value = numBeb;
 
                     select.CommandType = System.Data.CommandType.Text;
 
@@ -210,9 +210,9 @@ namespace SysBodega {
 
                     MySqlCommand select = new MySqlCommand();
                     select.Connection = conect;
-                    select.CommandText = "SELECT * FROM bebida ORDER BY cod_drink";
+                    select.CommandText = "SELECT * FROM bebida WHERE cod_drink = @codDrink ORDER BY cod_drink";
                     select.Parameters.Clear();
-                    select.Parameters.Add("@cod_drink", MySqlDbType.Int32).Value = numBeb;
+                    select.Parameters.Add("@codDrink", MySqlDbType.Int32).Value = numBeb;
 
                     select.CommandType = System.Data.CommandType.Text;
 
@@ -246,7 +246,62 @@ namespace SysBodega {
 
                     Console.WriteLine("\n");
                 }else if(opcao == 7) {
+                    Console.WriteLine("Digite o nome do cliente:");
+                    String nomeCli = Console.ReadLine();
+                    Console.WriteLine("Digite o cpf do cliente:");
+                    String cpfCli = Console.ReadLine();
+                    Console.WriteLine("O cliente pode comprar fiado?");
+                    String venderFiado = Console.ReadLine();
 
+
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                    conectar.Open();
+
+                    MySqlCommand create = new MySqlCommand();
+                    create.Connection = conectar;
+                    create.CommandText = "CREATE TABLE IF NOT EXISTS cliente(cod_cliente integer not null primary key auto_increment, nome_cliente varchar(30), cpf_cliente varchar(14), venderFiado varchar(3))";
+                    create.ExecuteNonQuery();
+                    create.CommandText = "INSERT INTO cliente(nome_cliente, cpf_cliente, venderFiado) VALUES ('"
+                        + nomeCli + "','" + cpfCli + "' , '" + venderFiado + "')";
+                    create.ExecuteNonQuery();
+                    conectar.Close();
+                    Console.WriteLine("\nO cliente foi inserido com sucesso!\n");
+
+                    Cliente bebado = new Cliente(nomeCli, cpfCli, codCliente, venderFiado);
+                    bebado.vendeFiado(venderFiado);
+                    clientes.Add(bebado);
+                    codCliente++;
+
+                }else if(opcao == 8) {
+                    int id_cli;
+                    int numCli;
+
+                    Console.WriteLine("Informe o código do cliente desejado:");
+                    String num = Console.ReadLine();
+                    numCli = int.Parse(num);
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                    conectar.Open();
+
+                    MySqlCommand select = new MySqlCommand();
+                    select.Connection = conectar;
+                    select.CommandText = "SELECT * FROM cliente WHERE cod_cliente = @codCliente ORDER BY cod_cliente";
+                    select.Parameters.Clear();
+                    select.Parameters.Add("@codCliente", MySqlDbType.Int32).Value = numCli;
+
+                    select.CommandType = System.Data.CommandType.Text;
+
+                    MySqlDataReader dr;
+                    dr = select.ExecuteReader();
+                    dr.Read();
+
+                    Console.WriteLine("O código do cliente é: " + dr.GetString(0));
+                    Console.WriteLine("O nome do cliente é: " + dr.GetString(1));
+                    Console.WriteLine("O cpf do cliente é: " + dr.GetString(2));
+                    Console.WriteLine("O cliente pode comprar fiado? " + dr.GetString(3));
+
+                    conectar.Close();
+
+                    Console.WriteLine("\n");
                 }
             } while (opcao != 9);
 
