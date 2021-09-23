@@ -20,7 +20,7 @@ namespace SysBodega {
 
                 Console.WriteLine("Seja muito bem-vindo ao sistema da Bodega do Juaum!");
             do {
-                Console.WriteLine("\nInforme o que você quer fazer: \n1 - Criar funcionário \n2 - Listar Funcionários \n3 - Adicionar bebida \n4 - Listar bebidas \n5 - Comprar bebida \n6 - Vender bebida \n7 - Adicionar cliente \n8 - Listar clientes \n9 - Sair");
+                Console.WriteLine("\nInforme o que você quer fazer: \n1 - Criar funcionário \n2 - Listar Funcionários \n3 - Adicionar bebida \n4 - Listar bebidas \n5 - Comprar bebida \n6 - Vender bebida \n7 - Adicionar cliente \n8 - Listar clientes \n9 - Alterar preço \n10 - Sair ");
                 opt = Console.ReadLine();
                 opcao = int.Parse(opt);
 
@@ -145,10 +145,10 @@ namespace SysBodega {
 
                     Console.WriteLine("O código da bebida é: " + dr.GetString(0));
                     Console.WriteLine("O nome da bebida é: " + dr.GetString(1));
-                    Console.WriteLine("O teor alcoolico da bebida é: " + dr.GetString(2));
-                    Console.WriteLine("A quantidade em MLs é: " + dr.GetString(3));
-                    Console.WriteLine("O preço da bebida é: " + dr.GetString(4));
-
+                    Console.WriteLine("O teor alcoolico da bebida é: " + dr.GetString(2) + "%");
+                    Console.WriteLine("O preço da bebida é: R$ " + dr.GetString(3));
+                    Console.WriteLine("A quantidade em MLs é: " + dr.GetString(4) + "Ml");
+                    
                     conectar.Close();
 
                     Console.WriteLine("\n");
@@ -308,8 +308,35 @@ namespace SysBodega {
                     conectar.Close();
 
                     Console.WriteLine("\n");
+                }else if(opcao == 9){
+                    int numBeb;
+                    int preco;
+
+                    Console.WriteLine("Informe o código da bebida:");
+                    String num = Console.ReadLine();
+                    numBeb = int.Parse(num);
+                    Console.WriteLine("Qual o novo valor da bebida:");
+                    String price = Console.ReadLine();
+                    preco = int.Parse(price);
+
+                    MySqlConnection conectar = new MySqlConnection("server=sysbodega.mysql.database.azure.com;database=bodega; Uid=sysadmin@sysbodega; pwd=admin123@;");
+                    conectar.Open();
+
+                    MySqlCommand update = new MySqlCommand();
+                    update.Connection = conectar;
+                    update.CommandText = "UPDATE bebida SET preco_bebida = @valor WHERE cod_drink = @cod_drink";
+                    update.Parameters.Clear();
+                    update.Parameters.Add("@cod_drink", MySqlDbType.Int32).Value = numBeb;
+                    update.Parameters.AddWithValue("@valor", preco);
+
+                    update.ExecuteNonQuery();
+
+                    conectar.Close();
+
+                    Console.WriteLine("Preço alterado com sucesso");
+
                 }
-            } while (opcao != 9);
+            } while (opcao != 10);
 
         }
     }
