@@ -839,25 +839,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Eletro\\.nuget\\packages\\": {},
+    "C:\\Users\\igorr\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Eletro\\Documents\\GitHub\\projetos\\C#\\SysBodega\\SysBodega\\SysBodega.csproj",
+      "projectUniqueName": "C:\\Users\\igorr\\Documents\\GitHub\\projetos\\C#\\SysBodega\\SysBodega\\SysBodega.csproj",
       "projectName": "SysBodega",
-      "projectPath": "C:\\Users\\Eletro\\Documents\\GitHub\\projetos\\C#\\SysBodega\\SysBodega\\SysBodega.csproj",
-      "packagesPath": "C:\\Users\\Eletro\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Eletro\\Documents\\GitHub\\projetos\\C#\\SysBodega\\SysBodega\\obj\\",
+      "projectPath": "C:\\Users\\igorr\\Documents\\GitHub\\projetos\\C#\\SysBodega\\SysBodega\\SysBodega.csproj",
+      "packagesPath": "C:\\Users\\igorr\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\igorr\\Documents\\GitHub\\projetos\\C#\\SysBodega\\SysBodega\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Eletro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\igorr\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
